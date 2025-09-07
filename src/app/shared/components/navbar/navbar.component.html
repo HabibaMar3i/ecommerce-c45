@@ -13,48 +13,47 @@
                     d="M1 1h15M1 7h15M1 13h15" />
             </svg>
         </button>
-        <div class="hidden w-full grow md:flex md:w-auto ml-4" id="navbar-default">
+        <div class="hidden w-full grow md:flex md:w-auto ml-4 mt-2" id="navbar-default">
             <ul
                 class="m-1 md:justify-center md:items-center space-y-2 me-auto font-medium flex flex-col p-4 md:p-0 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white">
                 <li>
-                    <a routerLink="/home" routerLinkActive="bg-gray-500 text-white font-semibold md:py-1 md:px-2 py-2 px-1"
-                        class="block rounded-sm"
-                        aria-current="page">Home</a>
+                    <a routerLink="/home"
+                        routerLinkActive="bg-gray-500 text-white font-semibold md:py-1 md:px-2 py-2 px-1"
+                        class="block rounded-sm" aria-current="page">Home</a>
                 </li>
                 <li>
-                    <a routerLink="/brands" routerLinkActive="bg-gray-500 text-white font-semibold md:py-1 md:px-2 py-2 px-1"
-                        class="block rounded-sm"
-                        aria-current="page">Brands</a>
+                    <a routerLink="/brands"
+                        routerLinkActive="bg-gray-500 text-white font-semibold md:py-1 md:px-2 py-2 px-1"
+                        class="block rounded-sm" aria-current="page">Brands</a>
                 </li>
                 <li>
-                    <a routerLink="/products" routerLinkActive="bg-gray-500 text-white font-semibold md:py-1 md:px-2 py-2 px-1"
-                        class="block rounded-sm"
-                        aria-current="page">Products</a>
+                    <a routerLink="/products"
+                        routerLinkActive="bg-gray-500 text-white font-semibold md:py-1 md:px-2 py-2 px-1"
+                        class="block rounded-sm" aria-current="page">Products</a>
                 </li>
                 <li>
-                    <a routerLink="/categories" routerLinkActive="bg-gray-500 text-white font-semibold md:py-1 md:px-2 py-2 px-1"
-                        class="block rounded-sm"
-                        aria-current="page">Categories</a>
+                    <a routerLink="/categories"
+                        routerLinkActive="bg-gray-500 text-white font-semibold md:py-1 md:px-2 py-2 px-1"
+                        class="block rounded-sm" aria-current="page">Categories</a>
                 </li>
                 <li>
-                    <a routerLink="/cart" routerLinkActive="bg-gray-500 text-white font-semibold md:py-1 md:px-2 py-2 px-1"
-                        class="block rounded-sm"
-                        aria-current="page">Cart</a>
+                    <a routerLink="/cart"
+                        routerLinkActive="bg-gray-500 text-white font-semibold md:py-1 md:px-2 py-2 px-1"
+                        class="block rounded-sm" aria-current="page">Cart</a>
                 </li>
                 <li>
-                    <a routerLink="/orders" routerLinkActive="bg-gray-500 text-white font-semibold md:py-1 md:px-2 py-2 px-1"
-                        class="block rounded-sm"
-                        aria-current="page">Orders</a>
+                    <a routerLink="/orders"
+                        routerLinkActive="bg-gray-500 text-white font-semibold md:py-1 md:px-2 py-2 px-1"
+                        class="block rounded-sm" aria-current="page">Orders</a>
                 </li>
                 <li>
                     <a class="hidden disabled"></a>
                 </li>
             </ul>
             <ul
-                class="m-1 md:justify-center md:items-center space-y-2 font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white">
+                class="mt-2 md:justify-center md:items-center space-y-2 font-medium flex flex-col p-4 md:p-0 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white">
                 <li>
-                    <a
-                        class="block rounded-sm space-x-1" aria-current="page">
+                    <a class="block rounded-sm space-x-2 cursor-pointer" aria-current="page">
                         <i class="fa-brands fa-facebook-f"></i>
                         <i class="fa-brands fa-instagram"></i>
                         <i class="fa-brands fa-tiktok"></i>
@@ -62,27 +61,28 @@
                     </a>
                 </li>
                 @if (isLogged === false) {
-                    <li>
-                    <a routerLink="/login" routerLinkActive="bg-gray-500 text-white font-semibold md:py-1 md:px-2 py-2 px-1"
-                        class="block rounded-sm"
-                        aria-current="page">Login</a>
+                <li>
+                    <a routerLink="/login"
+                        routerLinkActive="bg-gray-500 text-white font-semibold md:py-1 md:px-2 py-2 px-1"
+                        class="block rounded-sm" aria-current="page">Login</a>
                 </li>
                 <li>
-                    <a routerLink="/register" routerLinkActive="bg-gray-500 text-white font-semibold md:py-1 md:px-2 py-2 px-1"
-                        class="block rounded-sm"
-                        aria-current="page">Register</a>
+                    <a routerLink="/register"
+                        routerLinkActive="bg-gray-500 text-white font-semibold md:py-1 md:px-2 py-2 px-1"
+                        class="block rounded-sm" aria-current="page">Register</a>
                 </li>
-            }
-            @if (isLogged === true) {
+                }
+                @if (isLogged === true) {
                 <li>
-                    <a routerLink="/signout" routerLinkActive="bg-gray-500 text-white font-semibold md:py-1 md:px-2 py-2 px-1"
+                    <a routerLink="/signout"
+                        routerLinkActive="bg-gray-500 text-white font-semibold md:py-1 md:px-2 py-2 px-1"
                         class="block rounded-sm" aria-current="page">Sign
                         out</a>
                 </li>
                 <li>
                     <a class="hidden disabled"></a>
                 </li>
-            }
+                }
             </ul>
         </div>
     </div>
