@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ProductsService } from '../../core/services/products.service';
+import { Product } from '../../core/models/product';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +9,9 @@ import { ProductsService } from '../../core/services/products.service';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit{
-  
+
   private readonly productsService = inject(ProductsService)
-  products!: any[];
+  products: Product[] = [];
 
   getProducts(){
     this.productsService.getAllProducts().subscribe({
