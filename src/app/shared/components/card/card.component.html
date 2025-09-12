@@ -1,0 +1,33 @@
+<div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm">
+    <a href="#">
+        <div class="w-full aspect-[4/3]">
+            <img class="w-full rounded-t-lg object-top" [src]="product.imageCover" alt="product image" />
+        </div>
+    </a>
+    <div class="px-5 pb-5">
+        <a href="#">
+            <h5 class="text-xl font-semibold tracking-tight text-gray-900 mt-2">
+                {{ product.title.split(' ').slice(0, 2).join(' ') }}
+            </h5>
+        </a>
+
+        <div class="flex items-center mt-2.5 mb-5">
+            <div class="flex items-center justify-center space-x-1 rtl:space-x-reverse me-2">
+                <i class="fa-solid fa-star text-yellow-300 w-4 h-4"></i>
+                <i class="fa-solid fa-star-half-stroke text-yellow-300 w-4 h-4"></i>
+            </div>
+            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-2.5 py-0.5 rounded-sm">
+                {{ product.ratingsAverage }}
+            </span>
+        </div>
+
+        <div class="flex flex-col items-start gap-3 md:flex-row md:items-center md:justify-between">
+            <span class="text-3xl font-bold text-gray-900">${{ product.price }}</span>
+            <a href="#"
+                class="w-full md:w-auto text-center text-white bg-gray-500 hover:bg-gray-400 transition-all duration-300 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5">
+                Add to cart
+            </a>
+        </div>
+
+    </div>
+</div>
