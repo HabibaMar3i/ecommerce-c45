@@ -1,1 +1,12 @@
-<p>categories works!</p>
+<div class="px-[100px] grid gap-8 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 py-4">
+    @for(category of categories; track category._id){
+    <div>
+        <div class="w-full aspect-[4/3]">
+            <img class="w-full h-full rounded-lg object-top" [src]="category.image" alt="">
+        </div>
+        <h5 class="mt-2 mb-2 text-2xl font-bold tracking-tight text-gray-900 text-center">
+            {{ category.name }}
+        </h5>
+    </div>
+    }
+</div>
