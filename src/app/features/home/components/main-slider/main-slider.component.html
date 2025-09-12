@@ -1,1 +1,18 @@
-<p>main-slider works!</p>
+<div class="px-[100px] py-4">
+    <div class="grid grid-cols-1 gap-0 md:grid-cols-3">
+        <owl-carousel-o [options]="customOptions" class="md:col-span-2 md:row-span-2 col-span-1 row-span-1">
+            <ng-template carouselSlide><img src="images/supermarket4.jpg" class="h-[400px] w-full object-cover" alt=""></ng-template>
+            <ng-template carouselSlide><img src="images/supermarket5.jpg" class="h-[400px] w-full object-cover" alt=""></ng-template>
+            <ng-template carouselSlide><img src="images/supermarket6.jpg" class="h-[400px] w-full object-cover" alt=""></ng-template>
+            <ng-template carouselSlide><img src="images/supermarket2.jpg" class="h-[400px] w-full object-cover" alt=""></ng-template>
+        </owl-carousel-o>
+
+        <div>
+            <img src="images/supermarket1.jpg" class="h-[200px] w-full object-cover" alt="">
+        </div>
+
+        <div>
+            <img src="images/supermarket3.jpg" class="h-[200px] w-full object-cover" alt="">
+        </div>
+    </div>
+</div>

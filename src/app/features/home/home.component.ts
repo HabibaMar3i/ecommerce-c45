@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { PopularProductsComponent } from './components/popular-products/popular-products.component';
+import { CategoriesSliderComponent } from './components/categories-slider/categories-slider.component';
+import { MainSliderComponent } from './components/main-slider/main-slider.component';
 
 @Component({
   selector: 'app-home',
-  imports: [PopularProductsComponent],
+  imports: [PopularProductsComponent, CategoriesSliderComponent, MainSliderComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

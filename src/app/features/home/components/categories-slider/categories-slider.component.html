@@ -1,1 +1,12 @@
-<p>categories-slider works!</p>
+<div class="px-[100px] py-4">
+    <h2 class="text-2xl font-bold mb-4">Categories</h2>
+    <owl-carousel-o [options]="customOptions">
+    
+        @for (category of categories; track category._id) {
+        <ng-template carouselSlide>
+            <img [src]="category.image" [alt]="category.name" [title]="category.name" class="w-full h-[300px] object-top">
+        </ng-template>
+        }
+    
+    </owl-carousel-o>
+</div>
