@@ -1,0 +1,12 @@
+<div class="px-[100px] py-4">
+    <h2 class="text-2xl font-bold mb-4">Brands</h2>
+    <owl-carousel-o [options]="customOptions">
+    
+        @for (brand of brands; track brand._id) {
+        <ng-template carouselSlide>
+            <img [src]="brand.image" [alt]="brand.name" [title]="brand.name" class="w-full object-top">
+        </ng-template>
+        }
+    
+    </owl-carousel-o>
+</div>
