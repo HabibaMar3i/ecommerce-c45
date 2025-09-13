@@ -1,1 +1,7 @@
-<p>brands works!</p>
+<div class="flex items-center justify-center">
+    <div class="grid grid-cols-5 gap-2">
+        @for (brand of brands; track brand._id) {
+        <img [src]="brand.image" [alt]="brand.name" width="200px"/>
+        }
+    </div>
+</div>

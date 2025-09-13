@@ -8,19 +8,24 @@ import { Category } from '../../core/models/category';
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.css'
 })
-export class CategoriesComponent implements OnInit{
+export class CategoriesComponent implements OnInit {
   private readonly categoriesService = inject(CategoriesService);
-  categories:Category[] = [];
+  categories: Category[] = [];
 
-  ngOnInit(): void {
+  getBrands(): void {
     this.categoriesService.getAllCategories().subscribe({
-      next:(res)=>{
+      next: (res) => {
         console.log(res);
         this.categories = res.data;
       },
-      error:(err)=>{
+      error: (err) => {
         console.log(err);
       }
     })
+  }
+
+
+  ngOnInit(): void {
+    this.getBrands();
   }
 }
