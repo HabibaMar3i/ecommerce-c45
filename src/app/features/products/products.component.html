@@ -1,5 +1,10 @@
 <div class="px-[100px] grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-4">
-    @for (product of products; track product.id) {
+    @for (product of products | paginate: { id: 'foo', itemsPerPage: pageSize, currentPage: p, totalItems: total };
+    track product.id) {
     <app-card [product]="product"></app-card>
     }
+</div>
+<div class="flex items-center justify-center py-4">
+    <pagination-controls id="foo" (pageChange)="getProducts($event)" class="my-pagination">
+</pagination-controls>
 </div>

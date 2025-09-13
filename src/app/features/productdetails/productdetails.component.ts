@@ -12,8 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ProductdetailsComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute)
-  id: string | null = ''
-  selectedImage: string | null = null;
+  id: string | null = null;
 
   getParams() {
     this.activatedRoute.paramMap.subscribe(URLparams => {
@@ -22,20 +21,16 @@ export class ProductdetailsComponent implements OnInit {
   }
 
   private readonly productsService = inject(ProductsService)
-  productDetails: Product | null = null
+  productDetails: Product = {} as Product
   getProductDetails() {
     this.productsService.getSpecificProduct(this.id as string).subscribe({
       next: (res) => {
         this.productDetails = res.data
       },
       error: (error) => {
-        // handle error
+        console.log(error);
       }
     })
-  }
-
-  changeImage(src: string) {
-    this.selectedImage = src;
   }
 
   ngOnInit(): void {
