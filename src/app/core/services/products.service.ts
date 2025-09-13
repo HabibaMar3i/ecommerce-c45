@@ -12,4 +12,8 @@ export class ProductsService {
   getAllProducts():Observable<any>{
     return this.httpClient.get(environment.baseURL + 'products')
   }
+
+  getSpecificProduct(id: string):Observable<any>{
+    return this.httpClient.get(environment.baseURL + 'products/' + id)
+  }
 }

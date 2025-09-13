@@ -25,7 +25,7 @@ export const routes: Routes = [
         {path:'brands', component: BrandsComponent, title: 'Brands'},
         {path:'categories', component: CategoriesComponent, title: 'Categories'},
         {path:'products', component: ProductsComponent, title: 'Products'},
-        {path:'productdetails', component: ProductdetailsComponent, title: 'Product details'},
+        {path:'productdetails/:slug/:id', component: ProductdetailsComponent, title: 'Product details'},
         {path:'cart', component: CartComponent, title: 'Cart'},
         {path:'wishlist', component: WishlistComponent, title: 'Wishlist'},
         {path:'checkout', component: CheckoutComponent, title: 'Checkout'},
