@@ -21,7 +21,7 @@ export class RegisterComponent {
     phone: new FormControl(null, [Validators.required, Validators.pattern(/^(010|011|012|015)[0-9]{8}$/)])
   })
 
-  submitForm() {
+  submitRegisterForm() {
     if (this.registerForm.valid) {
       console.log(this.registerForm.value);
       console.log(this.registerForm);

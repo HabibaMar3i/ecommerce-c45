@@ -1,1 +1,59 @@
-<p>login works!</p>
+<form class="md:max-w-md md:mx-auto p-4 md:m-2" [formGroup]="loginForm" (ngSubmit)="submitLoginForm()">
+    <h1 class="text-gray-900 font-bold text-2xl">Log in Now:</h1>
+    @if(errorMessage){
+    <p class="my-3 text-sm text-red-600 p-2 bg-red-100 rounded-md border border-red-500"><span class="font-medium">Oops!</span> {{errorMessage}}</p>
+    }
+    <div class="my-3">
+        @let emailControl = loginForm.get('email');
+        <label for="email" class="block mb-2 text-sm font-medium" [ngClass]="{
+            'text-gray-900' : !emailControl?.errors,
+            'text-red-700' : emailControl?.errors && emailControl?.touched
+        }">Your email</label>
+        <input type="email" id="email" formControlName="email"
+            class="bg-gray-50 border text-gray-900 focus:ring-gray-500 focus:border-gray-500 text-sm rounded-lg block w-full p-2.5"
+            placeholder="Please enter your email" required [ngClass]="{
+                'border-gray-300 text-gray-900 focus:ring-gray-500 focus:border-gray-500' : !emailControl?.errors,
+                'border-red-300 text-red-900 focus:ring-red-500 focus:border-red-500 placeholder:text-red-900' : emailControl?.errors && emailControl?.touched
+            }" />
+
+        @if(emailControl?.errors && emailControl?.touched){
+        <div>
+            @if(emailControl?.getError('required')){
+            <p class="mt-2 text-sm text-red-600 "><span class="font-medium">Oops!</span> Email is required</p>
+            }@else if(emailControl?.getError('email')){
+            <p class="mt-2 text-sm text-red-600 "><span class="font-medium">Oops!</span> Email format is not correct</p>
+            }
+        </div>
+        }
+    </div>
+
+    <div class="my-3">
+        @let passwordControl = loginForm.get('password');
+        <label for="password" class="block mb-2 text-sm font-medium" [ngClass]="{
+            'text-gray-900' : !passwordControl?.errors,
+            'text-red-700' : passwordControl?.errors && passwordControl?.touched
+        }">Your password</label>
+        <input type="password" id="password" formControlName="password"
+            class="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5"
+            placeholder="Please enter your password" required [ngClass]="{
+                'border-gray-300' : !passwordControl?.errors,
+                'border-red-300 text-red-900 focus:ring-red-500 focus:border-red-500 placeholder:text-red-900' : passwordControl?.errors && passwordControl?.touched
+            }" />
+        @if(passwordControl?.errors && passwordControl?.touched){
+        <div>
+            @if(passwordControl?.getError('required')){
+            <p class="mt-2 text-sm text-red-600 "><span class="font-medium">Oops!</span> Password is required</p>
+            } @else if (passwordControl?.getError('pattern')) {
+            <p class="mt-2 text-sm text-red-600 "><span class="font-medium">Oops!</span> Password must contain at least
+                one capital letter, one small letter and a symbol</p>
+            }
+        </div>
+        }
+    </div>
+
+    <button type="submit"
+        class="cursor-pointer my-3 bg-gray-500 text-white font-semibold md:py-1 md:px-2 py-2 px-1 rounded-md w-full disabled:cursor-not-allowed disabled:bg-gray-400"
+        [disabled]="loginForm.invalid">
+        Log in
+    </button>
+</form>

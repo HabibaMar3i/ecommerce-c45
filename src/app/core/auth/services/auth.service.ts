@@ -12,4 +12,8 @@ export class AuthService {
   signUp(registerData: {}):Observable<any>{
     return this._httpClient.post(environment.baseURL + 'auth/signup', registerData)
   }
+
+  signIn(loginData: {}):Observable<any>{
+    return this._httpClient.post(environment.baseURL + 'auth/signin', loginData)
+  }
 }
