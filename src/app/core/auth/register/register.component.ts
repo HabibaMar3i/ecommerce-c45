@@ -1,7 +1,8 @@
 import { NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -11,15 +12,26 @@ import { AuthService } from '../services/auth.service';
 })
 export class RegisterComponent {
   private readonly authService = inject(AuthService)
+  private readonly router = inject(Router)
   registerData!: {}
-  errorMessage! : string
+  errorMessage!: string
   registerForm: FormGroup = new FormGroup({
     name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
     email: new FormControl(null, [Validators.required, Validators.email]),
     password: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).+$/)]),
     rePassword: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).+$/)]),
     phone: new FormControl(null, [Validators.required, Validators.pattern(/^(010|011|012|015)[0-9]{8}$/)])
-  })
+  }, { validators: this.confirmPassword.bind(this) })
+
+  confirmPassword(group: AbstractControl){
+    let password = group.get('password')?.value
+    let rePassword = group.get('rePassword')?.value
+    if(password === rePassword){
+      return null
+    } else {
+      return {mismatch: true}
+    }
+  }
 
   submitRegisterForm() {
     if (this.registerForm.valid) {
@@ -27,15 +39,22 @@ export class RegisterComponent {
       console.log(this.registerForm);
       this.registerData = this.registerForm.value
       this.authService.signUp(this.registerData).subscribe({
-        next:(res)=>{
+        next: (res) => {
           console.log(res)
-          if(res.message == "success"){
-            //redirect to login
+          if (res.message == "success") {
+            this.registerForm.reset()
+            this.router.navigate(['./login'])
           }
         },
-        error: (err)=>{
+        error: (err) => {
           console.log(err)
           this.errorMessage = err.error.message
+          if (this.errorMessage === 'Account Already Exists') {
+            setTimeout(() => {
+              this.router.navigate(['./login'])
+              this.registerForm.reset()
+            }, 2000)
+          }
         }
       })
     }

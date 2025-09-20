@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,7 @@ import { NgClass } from '@angular/common';
 })
 export class LoginComponent {
   private readonly authService = inject(AuthService)
+  private readonly router = inject(Router)
   registerData!: {}
   errorMessage! : string
   loginForm: FormGroup = new FormGroup({
@@ -27,8 +29,8 @@ export class LoginComponent {
         next:(res)=>{
           console.log(res)
           if(res.message == "success"){
-            //redirect to home page
             this.errorMessage = ''
+            this.router.navigate(['./home'])
           }
         },
         error: (err)=>{
