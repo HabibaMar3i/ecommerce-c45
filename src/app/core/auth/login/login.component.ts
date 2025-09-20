@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   private readonly authService = inject(AuthService)
   private readonly router = inject(Router)
+  loading: boolean = false
   registerData!: {}
   errorMessage! : string
   loginForm: FormGroup = new FormGroup({
@@ -25,17 +26,21 @@ export class LoginComponent {
       console.log(this.loginForm.value);
       console.log(this.loginForm);
       this.registerData = this.loginForm.value
+      this.loading = true
       this.authService.signIn(this.registerData).subscribe({
         next:(res)=>{
+          this.loading = false
           console.log(res)
           if(res.message == "success"){
             this.errorMessage = ''
+            this.loading = false
             this.router.navigate(['./home'])
           }
         },
         error: (err)=>{
           console.log(err)
           this.errorMessage = err.error.message
+          this.loading = false
         }
       })
     }

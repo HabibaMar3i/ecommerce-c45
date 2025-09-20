@@ -15,6 +15,7 @@ export class RegisterComponent {
   private readonly router = inject(Router)
   registerData!: {}
   errorMessage!: string
+  loading: boolean = false
   registerForm: FormGroup = new FormGroup({
     name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
     email: new FormControl(null, [Validators.required, Validators.email]),
@@ -23,30 +24,34 @@ export class RegisterComponent {
     phone: new FormControl(null, [Validators.required, Validators.pattern(/^(010|011|012|015)[0-9]{8}$/)])
   }, { validators: this.confirmPassword.bind(this) })
 
-  confirmPassword(group: AbstractControl){
+  confirmPassword(group: AbstractControl) {
     let password = group.get('password')?.value
     let rePassword = group.get('rePassword')?.value
-    if(password === rePassword){
+    if (password === rePassword) {
       return null
     } else {
-      return {mismatch: true}
+      return { mismatch: true }
     }
   }
 
   submitRegisterForm() {
     if (this.registerForm.valid) {
+    this.loading = true
       console.log(this.registerForm.value);
       console.log(this.registerForm);
       this.registerData = this.registerForm.value
       this.authService.signUp(this.registerData).subscribe({
         next: (res) => {
+          this.loading = false
           console.log(res)
           if (res.message == "success") {
             this.registerForm.reset()
             this.router.navigate(['./login'])
+            this.loading = false
           }
         },
         error: (err) => {
+          this.loading = false
           console.log(err)
           this.errorMessage = err.error.message
           if (this.errorMessage === 'Account Already Exists') {
