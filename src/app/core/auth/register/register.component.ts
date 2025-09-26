@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   private readonly authService = inject(AuthService)
   private readonly router = inject(Router)
   registerData!: {}
@@ -18,14 +18,16 @@ export class RegisterComponent {
   loading: boolean = false
   showPassword: boolean = false
   showConfirmPassword: boolean = false
-  registerForm: FormGroup = new FormGroup({
-    name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
-    email: new FormControl(null, [Validators.required, Validators.email]),
-    password: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).+$/)]),
-    rePassword: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).+$/)]),
-    phone: new FormControl(null, [Validators.required, Validators.pattern(/^(010|011|012|015)[0-9]{8}$/)])
-  }, { validators: this.confirmPassword.bind(this) })
-
+  registerForm!: FormGroup
+  initRegisterForm(): void {
+    this.registerForm = new FormGroup({
+      name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).+$/)]),
+      rePassword: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).+$/)]),
+      phone: new FormControl(null, [Validators.required, Validators.pattern(/^(010|011|012|015)[0-9]{8}$/)])
+    }, { validators: this.confirmPassword.bind(this) })
+  }
   confirmPassword(group: AbstractControl) {
     let password = group.get('password')?.value
     let rePassword = group.get('rePassword')?.value
@@ -35,10 +37,12 @@ export class RegisterComponent {
       return { mismatch: true }
     }
   }
-
+  ngOnInit(): void {
+    this.initRegisterForm();
+  }
   submitRegisterForm() {
     if (this.registerForm.valid) {
-    this.loading = true
+      this.loading = true
       console.log(this.registerForm.value);
       console.log(this.registerForm);
       this.registerData = this.registerForm.value
