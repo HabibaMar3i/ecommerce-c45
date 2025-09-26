@@ -13,7 +13,7 @@
         <input type="email" id="email" formControlName="email"
             class="bg-gray-50 border text-gray-900 focus:ring-gray-500 focus:border-gray-500 text-sm rounded-lg block w-full p-2.5"
             placeholder="Please enter your email" required [ngClass]="{
-                'border-gray-300 text-gray-900 focus:ring-gray-500 focus:border-gray-500' : !emailControl?.errors,
+                'border-green-700 border-2 text-green-700' : emailControl?.valid && emailControl?.touched,
                 'border-red-300 text-red-900 focus:ring-red-500 focus:border-red-500 placeholder:text-red-900' : emailControl?.errors && emailControl?.touched
             }" />
 
@@ -37,7 +37,7 @@
         <input type="password" id="password" formControlName="password"
             class="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5"
             placeholder="Please enter your password" required [ngClass]="{
-                'border-gray-300' : !passwordControl?.errors,
+                'border-green-700 border-2 text-green-700' : passwordControl?.valid && passwordControl?.touched,
                 'border-red-300 text-red-900 focus:ring-red-500 focus:border-red-500 placeholder:text-red-900' : passwordControl?.errors && passwordControl?.touched
             }" />
         @if(passwordControl?.errors && passwordControl?.touched){
