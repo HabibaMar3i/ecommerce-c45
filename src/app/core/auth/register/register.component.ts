@@ -16,6 +16,8 @@ export class RegisterComponent {
   registerData!: {}
   errorMessage!: string
   loading: boolean = false
+  showPassword: boolean = false
+  showConfirmPassword: boolean = false
   registerForm: FormGroup = new FormGroup({
     name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
     email: new FormControl(null, [Validators.required, Validators.email]),

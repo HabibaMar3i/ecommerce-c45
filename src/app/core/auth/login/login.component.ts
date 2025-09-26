@@ -14,6 +14,7 @@ export class LoginComponent {
   private readonly authService = inject(AuthService)
   private readonly router = inject(Router)
   loading: boolean = false
+  showPassword: boolean = false
   registerData!: {}
   errorMessage! : string
   loginForm: FormGroup = new FormGroup({
