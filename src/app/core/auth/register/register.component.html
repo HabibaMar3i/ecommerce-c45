@@ -13,7 +13,7 @@
         <input type="text" id="name" formControlName="name"
             class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5"
             placeholder="Please enter your name" required [ngClass]="{
-                'border-gray-300' : !nameControl?.errors,
+                'border-green-700 border-2 text-green-700' : nameControl?.valid && nameControl?.touched,
                 'border-red-300 text-red-900 focus:ring-red-500 focus:border-red-500 placeholder:text-red-900' : nameControl?.errors && nameControl?.touched
             }" />
         @if(nameControl?.errors && nameControl?.touched){
@@ -38,7 +38,7 @@
         <input type="email" id="email" formControlName="email"
             class="bg-gray-50 border text-gray-900 focus:ring-gray-500 focus:border-gray-500 text-sm rounded-lg block w-full p-2.5"
             placeholder="Please enter your email" required [ngClass]="{
-                'border-gray-300 text-gray-900 focus:ring-gray-500 focus:border-gray-500' : !emailControl?.errors,
+                'border-green-700 border-2 text-green-700' : emailControl?.valid && emailControl?.touched,
                 'border-red-300 text-red-900 focus:ring-red-500 focus:border-red-500 placeholder:text-red-900' : emailControl?.errors && emailControl?.touched
             }" />
 
@@ -62,7 +62,7 @@
         <input type="password" id="password" formControlName="password"
             class="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5"
             placeholder="Please enter your password" required [ngClass]="{
-                'border-gray-300' : !passwordControl?.errors,
+                'border-green-700 border-2 text-green-700' : passwordControl?.valid && passwordControl?.touched,
                 'border-red-300 text-red-900 focus:ring-red-500 focus:border-red-500 placeholder:text-red-900' : passwordControl?.errors && passwordControl?.touched
             }" />
         @if(passwordControl?.errors && passwordControl?.touched){
@@ -86,7 +86,7 @@
         <input type="password" id="rePassword" formControlName="rePassword"
             class="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5"
             placeholder="Please enter confirm password" required [ngClass]="{
-                'border-gray-300' : !rePasswordControl?.errors,
+                'border-green-700 border-2 text-green-700' : rePasswordControl?.valid && rePasswordControl?.touched,
                 'border-red-300 text-red-900 focus:ring-red-500 focus:border-red-500 placeholder:text-red-900' : rePasswordControl?.errors && rePasswordControl?.touched
             }" />
         @if(rePasswordControl?.errors && rePasswordControl?.touched){
@@ -114,7 +114,7 @@
         <input type="tel" id="phone" formControlName="phone"
             class="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5"
             placeholder="Please enter your phone" required [ngClass]="{
-                'border-gray-300' : !phoneControl?.errors,
+                'border-green-700 border-2 text-green-700' : phoneControl?.valid && phoneControl?.touched,
                 'border-red-300 text-red-900 focus:ring-red-500 focus:border-red-500 placeholder:text-red-900' : phoneControl?.errors && phoneControl?.touched
             }" />
         @if(phoneControl?.errors && phoneControl?.touched){
@@ -132,7 +132,7 @@
         class="cursor-pointer my-3 bg-gray-500 text-white font-semibold md:py-1 md:px-2 py-2 px-1 rounded-md w-full disabled:cursor-not-allowed disabled:bg-gray-400"
         [disabled]="registerForm.invalid">
         @if (loading) {
-            <i class="fa-solid fa-spinner animate-spin"></i>
+        <i class="fa-solid fa-spinner animate-spin"></i>
         }
         {{loading ? 'Loading' : 'Register'}}
     </button>
