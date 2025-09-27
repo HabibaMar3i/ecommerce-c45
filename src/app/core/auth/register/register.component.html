@@ -173,9 +173,9 @@
         }
     </div>
 
-    <button type="submit" [disabled]="loading"
-        class="cursor-pointer my-3 bg-gray-500 text-white font-semibold md:py-1 md:px-2 py-2 px-1 rounded-md w-full disabled:cursor-not-allowed disabled:bg-gray-400"
-        [disabled]="registerForm.invalid">
+    <button type="submit"
+        class="cursor-pointer my-3 bg-gray-500 text-white font-semibold md:py-1 md:px-2 py-2 px-1 rounded-md w-full"
+        >
         @if (loading) {
         <i class="fa-solid fa-spinner animate-spin"></i>
         }

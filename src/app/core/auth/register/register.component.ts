@@ -3,6 +3,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -18,6 +19,7 @@ export class RegisterComponent implements OnInit {
   loading: boolean = false
   showPassword: boolean = false
   showConfirmPassword: boolean = false
+  subscription: Subscription = new Subscription()
   registerForm!: FormGroup
   initRegisterForm(): void {
     this.registerForm = new FormGroup({
@@ -42,11 +44,12 @@ export class RegisterComponent implements OnInit {
   }
   submitRegisterForm() {
     if (this.registerForm.valid) {
+      this.subscription.unsubscribe()
       this.loading = true
       console.log(this.registerForm.value);
       console.log(this.registerForm);
       this.registerData = this.registerForm.value
-      this.authService.signUp(this.registerData).subscribe({
+      this.subscription = this.authService.signUp(this.registerData).subscribe({
         next: (res) => {
           this.loading = false
           console.log(res)
