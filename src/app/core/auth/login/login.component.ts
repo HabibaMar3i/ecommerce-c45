@@ -1,8 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -10,13 +11,14 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   private readonly authService = inject(AuthService)
   private readonly router = inject(Router)
   loading: boolean = false
   showPassword: boolean = false
   loginData!: {}
   errorMessage!: string;
+  subscription: Subscription = new Subscription()
   loginForm!: FormGroup
   initLoginForm(): void {
     this.loginForm = new FormGroup({
@@ -29,11 +31,12 @@ export class LoginComponent implements OnInit {
   }
   submitLoginForm() {
     if (this.loginForm.valid) {
+      this.subscription.unsubscribe()
       console.log(this.loginForm.value);
       console.log(this.loginForm);
       this.loginData = this.loginForm.value
       this.loading = true
-      this.authService.signIn(this.loginData).subscribe({
+      this.subscription = this.authService.signIn(this.loginData).subscribe({
         next: (res) => {
           this.loading = false
           console.log(res)
@@ -53,5 +56,9 @@ export class LoginComponent implements OnInit {
     else {
       this.loginForm.markAllAsTouched();
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
