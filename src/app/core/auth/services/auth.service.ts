@@ -4,7 +4,7 @@ import { environment } from '../../../../environments/environment.development';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
-
+import { jwtDecode } from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -15,16 +15,29 @@ export class AuthService {
   private readonly router = inject(Router)
 
 
-  signUp(registerData: {}):Observable<any>{
+  signUp(registerData: {}): Observable<any> {
     return this._httpClient.post(environment.baseURL + 'auth/signup', registerData)
   }
 
-  signIn(loginData: {}):Observable<any>{
+  signIn(loginData: {}): Observable<any> {
     return this._httpClient.post(environment.baseURL + 'auth/signin', loginData)
   }
 
-  signOut():void{
+  signOut(): void {
     this.cookieService.delete('token')
     this.router.navigate(['/login'])
+  }
+
+  decodeToken() {
+    let token;
+    try {
+      token = jwtDecode(this.cookieService.get('token'))
+      console.log('====================================');
+      console.log(token);
+      console.log('====================================');
+    } catch (error) {
+      this.signOut();
+    }
+    return token;
   }
 }

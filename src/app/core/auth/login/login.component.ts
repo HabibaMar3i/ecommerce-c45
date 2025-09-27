@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.errorMessage = ''
             this.loading = false
             this.cookieService.set('token', res.token)
+            this.authService.decodeToken()
             this.router.navigate(['./home'])
           }
         },
