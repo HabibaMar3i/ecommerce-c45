@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ import { Subscription } from 'rxjs';
 export class LoginComponent implements OnInit, OnDestroy {
   private readonly authService = inject(AuthService)
   private readonly router = inject(Router)
+  private readonly cookieService = inject(CookieService)
   loading: boolean = false
   showPassword: boolean = false
   loginData!: {}
@@ -43,6 +45,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           if (res.message == "success") {
             this.errorMessage = ''
             this.loading = false
+            this.cookieService.set('token', res.token)
             this.router.navigate(['./home'])
           }
         },
