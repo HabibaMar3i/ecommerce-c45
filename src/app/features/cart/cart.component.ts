@@ -43,4 +43,27 @@ export class CartComponent implements OnInit {
       })
     })
   }
+
+  removeProduct() {
+    this._CartService.deleteProduct(this.productId).subscribe({
+      next: ((res) => {
+        console.log(res);
+      }),
+      error: ((err) => {
+        console.log(err);
+      })
+    })
+  }
+
+  deleteCart() {
+    this._CartService.clearCart().subscribe({
+      next: ((res) => {
+        console.log(res);
+        this.getCart();
+      }),
+      error: ((err) => {
+        console.log(err);
+      })
+    })
+  }
 }
