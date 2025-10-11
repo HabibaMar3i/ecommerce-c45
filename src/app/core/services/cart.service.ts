@@ -11,9 +11,18 @@ export class CartService {
   private readonly _HttpClient = inject(HttpClient)
   private readonly _CookieService = inject(CookieService)
 
-  token = this._CookieService.get('token')
+  headers: object = {
+    headers: { token: this._CookieService.get('token'), },
+  }
+  getUserCart(): Observable<any> {
+    return this._HttpClient.get(environment.baseURL + "cart", this.headers)
+  }
 
-  getUserCart():Observable<any>{
-    return this._HttpClient.get(environment.baseURL + "cart", {headers: {token: this._CookieService.get('token')}})
+  addToCart(productId: string): Observable<any> {
+    return this._HttpClient.post(environment.baseURL + "cart", { productId: productId }, this.headers)
+  }
+
+  updateProductQuantity(count: number, productId: string): Observable<any> {
+    return this._HttpClient.post(environment.baseURL + "cart" + "productId", { count: count }, this.headers)
   }
 }
