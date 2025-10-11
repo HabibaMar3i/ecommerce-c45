@@ -21,6 +21,7 @@ export class CardComponent {
     this._CartService.addToCart(productId).subscribe({
       next:((res)=>{
         console.log(res);
+        console.log(res.message);
       }),
       error:((err)=>{
         console.log(err);
