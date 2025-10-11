@@ -13,8 +13,6 @@ export class CartComponent implements OnInit {
   cart!: Product[]
   cartItemsNo!: number
   cartTotal!: number
-  productId!: string
-  productCount!: number
 
   ngOnInit(): void {
     this.getCart();
@@ -33,8 +31,8 @@ export class CartComponent implements OnInit {
     });
   }
 
-  updateProduct() {
-    this._CartService.updateProductQuantity(this.productCount, this.productId).subscribe({
+  updateProduct(productCount:number, productId:string) {
+    this._CartService.updateProductQuantity(productCount, productId).subscribe({
       next: ((res) => {
         console.log(res);
       }),
@@ -44,8 +42,8 @@ export class CartComponent implements OnInit {
     })
   }
 
-  removeProduct() {
-    this._CartService.deleteProduct(this.productId).subscribe({
+  removeProduct(productId:string) {
+    this._CartService.deleteProduct(productId).subscribe({
       next: ((res) => {
         console.log(res);
       }),
