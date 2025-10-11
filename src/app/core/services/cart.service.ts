@@ -14,6 +14,7 @@ export class CartService {
   headers: object = {
     headers: { token: this._CookieService.get('token'), },
   }
+
   getUserCart(): Observable<any> {
     return this._HttpClient.get(environment.baseURL + "cart", this.headers)
   }
@@ -24,5 +25,13 @@ export class CartService {
 
   updateProductQuantity(count: number, productId: string): Observable<any> {
     return this._HttpClient.post(environment.baseURL + "cart" + "productId", { count: count }, this.headers)
+  }
+
+  deleteProduct(productId: string): Observable<any> {
+    return this._HttpClient.delete(environment.baseURL + "cart" + "productId", this.headers)
+  }
+
+  clearCart(): Observable<any> {
+    return this._HttpClient.delete(environment.baseURL + "cart", this.headers)
   }
 }
